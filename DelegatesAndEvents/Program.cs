@@ -14,18 +14,19 @@ namespace DelegatesAndEvents
             // Creating the delegates, notice that they've got :
             WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
             WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
-            WorkPerformedHandler del3Hrs = new WorkPerformedHandler(WorkPerformed3);
+            WorkPerformedHandler del3 = new WorkPerformedHandler(WorkPerformed3);
 
-            del1 += del2 + del3Hrs; // Concatinating of the delegates.
+            del1 += del2 + del3; // Concatinating of the delegates.
+            Console.WriteLine("Concatination completed");
 
             /* When we're returning some value through the combinated several delegates, 
              * then we will finally get the value from the last one, in this case: 3.
              * If we would call all three of them separately, then we would get 6 
              * (1 + 2 + 3) */
             int del2Hrs = del2(0, WorkType.Golf);
-            int del3 = del3Hrs(0, WorkType.Golf);
-            int finalHours = del1(0, WorkType.Golf); // Invocation of delegates, they've passed same arguments.
-
+            int del3Hrs = del3(0, WorkType.Golf);
+            int finalHours = del1(1, WorkType.Golf); // Invocation of concatinated three delegates, they've passed same arguments.
+            Console.WriteLine("Invocation completed, printing the returned values: ");
             Console.WriteLine(del3Hrs);
             Console.WriteLine(del2Hrs);
             Console.WriteLine(finalHours);
@@ -53,7 +54,7 @@ namespace DelegatesAndEvents
         static int WorkPerformed3(int hrs, WorkType workType)
         {
             Console.WriteLine("WorkPerformed3 called " + workType.ToString() + 
-                " I'll take you: " + hrs.ToString());
+                " It'll take you: " + hrs.ToString());
             return hrs + 3;
         }
     }
