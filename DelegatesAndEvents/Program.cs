@@ -8,8 +8,7 @@ namespace DelegatesAndEvents
 {
     class Program
     {
-        // Declaring the Delegate:
-        public delegate int WorkPerformedHandler(int hours, WorkType workType);
+
         static void Main(string[] args)
         {
             // Creating the delegates, notice that they've got :
