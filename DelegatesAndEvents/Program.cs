@@ -9,18 +9,27 @@ namespace DelegatesAndEvents
     class Program
     {
         // Declaring the Delegate:
-        public delegate void WorkPerformedHandler(int hours, WorkType workType);
+        public delegate int WorkPerformedHandler(int hours, WorkType workType);
         static void Main(string[] args)
         {
             // Creating the delegates, notice that they've got :
             WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
             WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
-            WorkPerformedHandler del3 = new WorkPerformedHandler(WorkPerformed3);
+            WorkPerformedHandler del3Hrs = new WorkPerformedHandler(WorkPerformed3);
 
-            del1 += del2 + del3; // Concatinating of the delegates.
+            del1 += del2 + del3Hrs; // Concatinating of the delegates.
 
-            del1(100, WorkType.Golf); // Invocation of delegates, they've passed same arguments.
+            /* When we're returning some value through the combinated several delegates, 
+             * then we will finally get the value from the last one, in this case: 3.
+             * If we would call all three of them separately, then we would get 6 
+             * (1 + 2 + 3) */
+            int del2Hrs = del2(0, WorkType.Golf);
+            int del3 = del3Hrs(0, WorkType.Golf);
+            int finalHours = del1(0, WorkType.Golf); // Invocation of delegates, they've passed same arguments.
 
+            Console.WriteLine(del3Hrs);
+            Console.WriteLine(del2Hrs);
+            Console.WriteLine(finalHours);
         }
 
         // Method gets the delegate object as an argument and performs an action on it:
@@ -29,21 +38,24 @@ namespace DelegatesAndEvents
             del(5, WorkType.GoToMeetings);
         }
 
-        // Several eventHandlers performs some work:
-        static void WorkPerformed1(int hrs, WorkType wrkType)
+        // Several eventHandlers performs some work, they're returning somethind:
+        static int WorkPerformed1(int hrs, WorkType wrkType)
         {
             Console.WriteLine("WorkPerformed1 called " + hrs.ToString());
+            return hrs + 1;
         }
 
-        static void WorkPerformed2(int hrs, WorkType workType)
+        static int WorkPerformed2(int hrs, WorkType workType)
         {
             Console.WriteLine("WorkPerformed2 called " + workType.ToString());
+            return hrs + 2;
         }
 
-        static void WorkPerformed3(int hrs, WorkType workType)
+        static int WorkPerformed3(int hrs, WorkType workType)
         {
             Console.WriteLine("WorkPerformed3 called " + workType.ToString() + 
                 " I'll take you: " + hrs.ToString());
+            return hrs + 3;
         }
     }
 
