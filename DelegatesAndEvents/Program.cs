@@ -28,7 +28,7 @@ namespace DelegatesAndEvents
             int finalHours = del1(1, WorkType.Golf); // Invocation of concatinated three delegates, they've passed same arguments.
             Console.WriteLine("Invocation completed, printing the returned values: ");
             Console.WriteLine(del3Hrs);
-            Console.WriteLine(del2Hrs);
+            /Console.WriteLine(del2Hrs);
             Console.WriteLine(finalHours);
         }
 

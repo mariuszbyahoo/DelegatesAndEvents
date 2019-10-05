@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DelegatesAndEvents
 {
     // Declaring the Delegate:
-    public delegate int WorkPerformedHandler(int hours, WorkType workType);
+    public delegate int WorkPerformedHandler(object sender, WorkPerformedEventArgs e);
     public class Worker
     {
         //Below defining a custom EventHandler
@@ -34,7 +34,7 @@ namespace DelegatesAndEvents
             var del = WorkPerformed as WorkPerformedHandler;
             if (del != null)
             {
-                del(hours, workType);
+                del(this, new WorkPerformedEventArgs(hours, workType));
             }
         }
 
