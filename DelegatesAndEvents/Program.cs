@@ -13,7 +13,7 @@ namespace DelegatesAndEvents
         {
 
             var worker = new Worker();
-            worker.WorkPerformed += worker_WorkPerformed; // Delegate inference, 
+            worker.WorkPerformed += Worker_WorkPerformed; ; // Delegate inference, 
             // (pol.) Wywnioskowanie dokładnego delegata : 
             // when we are using the concat operator, we're attaching an event to an event handler.
             // So we may just type the event handler, because the Compiler will "infer" the delegate.
@@ -22,7 +22,8 @@ namespace DelegatesAndEvents
             //which matches the delegate's signature
 
 
-            worker.WorkCompleted += new EventHandler(worker_WorkCompleted);
+            worker.WorkCompleted += Worker_WorkCompleted;
+
             worker.DoWork(8, WorkType.GenerateReports);
 
             Console.Read();
@@ -49,12 +50,12 @@ namespace DelegatesAndEvents
             //Console.WriteLine(finalHours);
         }
 
-        private static void worker_WorkCompleted(object sender, EventArgs e)
+        private static void Worker_WorkCompleted(object sender, EventArgs e)
         {
             Console.WriteLine("Worker is done.");
         }
 
-        private static int worker_WorkPerformed(object sender, WorkPerformedEventArgs e)
+        private static int Worker_WorkPerformed(object sender, WorkPerformedEventArgs e)
         {
             Console.WriteLine(e.Hours + " " + e.WorkType);
             return e.Hours;
