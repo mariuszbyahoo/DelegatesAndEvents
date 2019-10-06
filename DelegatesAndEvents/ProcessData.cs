@@ -8,16 +8,18 @@ namespace DelegatesAndEvents
 {
     public class ProcessData
     {
-        public void Process(int x, int y, BizRulesDelegate del)
+        public void ProcessFunc(int x, int y, Func<int, int, int> del)
         {
             var result = del(x, y);
-            Console.WriteLine(result);
+            Console.WriteLine("Func<T1, T2, T3> processed: args: "+ 
+                x + ", " + y + " = " + result);
         }
 
         public void ProcessAction(int x, int y, Action<int, int> action)
         {
+            Console.WriteLine("Action<T1, T2> processed: args: "+
+                x + ", " + y + " = ");
             action(x, y);
-            Console.WriteLine("Action<T1, T2> processed");
         }
     }
 }

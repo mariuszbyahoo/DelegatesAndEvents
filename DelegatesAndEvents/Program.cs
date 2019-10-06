@@ -13,11 +13,11 @@ namespace DelegatesAndEvents
 
         static void Main(string[] args)
         {
-            BizRulesDelegate addDel = (x, y) => x + y;
-            BizRulesDelegate multiplyDel = (x, y) => x * y;
-
             var data = new ProcessData();
-            data.Process(2, 9, multiplyDel);
+
+            Func<int, int, int> funcAddDel = (x, y) => x + y;
+            Func<int, int, int> funcMultiplyDel = (x, y) => x * y;
+            data.ProcessFunc(3, 6, funcMultiplyDel);
 
             Action<int, int> myAction = (x, y) => Console.WriteLine(x + y);
             Action<int, int> myMultiplyAction = (x, y) => Console.WriteLine(x * y);
@@ -26,7 +26,6 @@ namespace DelegatesAndEvents
 
 
             var worker = new Worker();
-
             worker.WorkPerformed += (s, e) =>
             {
                 Console.WriteLine(e.Hours + " " + e.WorkType);
