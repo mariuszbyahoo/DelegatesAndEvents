@@ -17,7 +17,13 @@ namespace DelegatesAndEvents
             BizRulesDelegate multiplyDel = (x, y) => x * y;
 
             var data = new ProcessData();
-            data.Process(2, 3, multiplyDel);
+            data.Process(2, 9, multiplyDel);
+
+            Action<int, int> myAction = (x, y) => Console.WriteLine(x + y);
+            Action<int, int> myMultiplyAction = (x, y) => Console.WriteLine(x * y);
+            data.ProcessAction(2, 3, myAction);
+            data.ProcessAction(2, 3, myMultiplyAction);
+
 
             var worker = new Worker();
 
