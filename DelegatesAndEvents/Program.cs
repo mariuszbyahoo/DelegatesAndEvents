@@ -22,7 +22,11 @@ namespace DelegatesAndEvents
             //which matches the delegate's signature
 
 
-            worker.WorkCompleted += Worker_WorkCompleted;
+            worker.WorkCompleted += delegate (object sender, 
+                EventArgs e)
+                {
+                    Console.WriteLine("Work Completed");
+                };
 
             worker.DoWork(8, WorkType.GenerateReports);
 
