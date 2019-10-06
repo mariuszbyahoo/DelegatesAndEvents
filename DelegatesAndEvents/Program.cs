@@ -13,7 +13,15 @@ namespace DelegatesAndEvents
         {
 
             var worker = new Worker();
-            worker.WorkPerformed += new WorkPerformedHandler(worker_WorkPerformed) as WorkPerformedHandler;
+            worker.WorkPerformed += worker_WorkPerformed; // Delegate inference, 
+            // (pol.) Wywnioskowanie dokładnego delegata : 
+            // when we are using the concat operator, we're attaching an event to an event handler.
+            // So we may just type the event handler, because the Compiler will "infer" the delegate.
+            // It will generate a delegate automatically just by looking on the delegate's signature,
+            // so it will create the delegate for us as it builds the code, 
+            //which matches the delegate's signature
+
+
             worker.WorkCompleted += new EventHandler(worker_WorkCompleted);
             worker.DoWork(8, WorkType.GenerateReports);
 
