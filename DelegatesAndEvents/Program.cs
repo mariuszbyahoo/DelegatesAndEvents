@@ -13,6 +13,22 @@ namespace DelegatesAndEvents
 
         static void Main(string[] args)
         {
+            var customers = new List<Customer>
+            {
+                new Customer { City = "Złotokłos", FirstName = "Grzesio", LastName = "Złotokłoski", ID = 4 },
+                new Customer { City = "Piaseczno", FirstName = "Jan", LastName = "Kowalski", ID = 1},
+                new Customer { City = "Złotokłos", FirstName = "Seba", LastName = "Jarząbek", ID = 2 },
+                new Customer { City = "Warszawa", FirstName = "Brajan", LastName = "NULL", ID = 3 },
+
+            };
+
+            var zloCustomers = customers.Where(c => c.City == "Złotokłos").OrderBy(c => c.LastName);
+
+            foreach (var customer in zloCustomers)
+            {
+                Console.WriteLine(customer.LastName) ;
+            }
+
             var data = new ProcessData();
 
             Func<int, int, int> funcAddDel = (x, y) => x + y;
@@ -28,7 +44,7 @@ namespace DelegatesAndEvents
             var worker = new Worker();
             worker.WorkPerformed += (s, e) =>
             {
-                Console.WriteLine(e.Hours + " " + e.WorkType);
+                Console.WriteLine("Worked: "+e.Hours + " hours, done : " + e.WorkType);
                 return e.Hours;
             };
 
